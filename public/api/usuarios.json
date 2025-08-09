@@ -1,0 +1,18 @@
+{
+"usuarios": [
+    {
+      "id": 1,
+      "nome": "Admin",
+      "email": "admin@pizzaria.com",
+      "senha": "123456",
+      "tipo": "admin"
+    },
+    {
+      "id": 2,
+      "nome": "Cliente Teste",
+      "email": "cliente@pizzaria.com",
+      "senha": "senha123",
+      "tipo": "cliente"
+    }
+  ]
+}
