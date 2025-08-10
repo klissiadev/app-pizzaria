@@ -13,6 +13,13 @@
       "email": "cliente@pizzaria.com",
       "senha": "senha123",
       "tipo": "cliente"
+    },
+    {
+      "id": 3,
+      "nome": "Funcionario Teste",
+      "email": "funcionario@pizzaria.com",
+      "senha": "senha456",
+      "tipo": "funcionario"
     }
   ]
 }

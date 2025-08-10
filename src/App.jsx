@@ -1,13 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
 import './App.css';
+import Header from './components/Header';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-    </Routes>
+    <>
+      <Header/>
+      <AppRoutes/>
+    </>
   );
 }
 
