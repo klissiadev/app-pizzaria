@@ -7,11 +7,9 @@
         {
           "pizzaId": 2,
           "nome": "Calabresa",
-          "ingredientes": [
-            "Calabresa",
-            "Cebola",
-            "Queijo mussarela",
-            "Molho de tomate"
+          "observacao": [
+            "Sem cebola",
+            "Sem calabresa"
           ],
           "tamanho": "Média",
           "preco": 45,
@@ -20,7 +18,7 @@
         {
           "nome": "Pizza Personalizada",
           "tipo": "doce",
-          "ingredientes": [
+          "observacao": [
             "Chocolate",
             "Morango"
           ],
@@ -32,7 +30,46 @@
       "tipoEntrega": "mesa",
       "numeroMesa": 7,
       "endereco": null,
-      "data": "2025-08-07T18:00:00Z",
+      "status": "Em preparo"
+    },
+    {
+      "id": "2",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": 3,
+          "nome": "Frango com Catupiry",
+          "observacao": [
+            null
+          ],
+          "tamanho": "Pequena",
+          "preco": 45,
+          "quantidade": 2
+        },
+        {
+          "pizzaId": 6,
+          "nome": "Banana com Canela",
+          "observacao": [
+            "Sem Leite Condensado"
+          ],
+          "tamanho": "Pequena",
+          "preco": 35,
+          "quantidade": 1
+        },
+        {
+          "pizzaId": 8,
+          "nome": "Vegana de Legumes",
+          "observacao": [
+            "Sem Cebola"
+          ],
+          "tamanho": "Grande",
+          "preco": 35,
+          "quantidade": 1
+        }
+      ],
+      "tipoEntrega": "entrega",
+      "numeroMesa": null,
+      "endereco": "Rua 12, 210, Coroado",
       "status": "Em preparo"
     }
   ]

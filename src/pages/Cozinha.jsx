@@ -1,44 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Box, Tabs, Tab, Paper } from "@mui/material";
 import OrdersList from "../components/OrderList";
+import DetalhesPedido from "../components/DetalhesPedido";
 
 const Cozinha = () => {
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-
   const [tab, setTab] = useState(0);
   const [pedidos, setPedidos] = useState([]);
+  const [pedidoSelecionado, setPedidoSelecionado] = useState(null);
+  const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/pedidos")
+    atualizarPedidos();
+    fetch("http://localhost:3001/pizzas")
       .then((res) => res.json())
-      .then((data) => {
-        setPedidos(
-          data.map((p) => ({
-            id: p.id,
-            type: p.tipoEntrega === "mesa" ? `Mesa ${p.numeroMesa}` : "Entrega",
-            status: p.status,
-            items: p.itens.map(
-              (item) => `${item.quantidade}x ${item.nome} (${item.tamanho})`
-            ),
-          }))
-        );
-      })
-      .catch((err) => console.error("Erro ao carregar pedidos:", err));
+      .then((data) => setPizzas(data))
+      .catch((err) => console.error("Erro ao carregar pizzas:", err));
   }, []);
 
   function atualizarPedidos() {
     fetch("http://localhost:3001/pedidos")
       .then(res => res.json())
-      .then(data => {
-        setPedidos(
-          data.map(p => ({
-            id: p.id,
-            type: p.tipoEntrega === "mesa" ? `Mesa ${p.numeroMesa}` : "Entrega",
-            status: p.status,
-            items: p.itens.map(item => `${item.quantidade}x ${item.nome} (${item.tamanho})`)
-          }))
-        );
-      });
+      .then(data => setPedidos(data))
+      .catch(err => console.error("Erro ao carregar pedidos:", err));
   }
 
   const filteredOrders = () => {
@@ -54,15 +38,15 @@ const Cozinha = () => {
 
   return (
     <Box sx={{ p: 2, display: "flex", gap: 2 }}>
+      {/* Lista de pedidos */}
       <Paper sx={{ flex: 1, p: 1 }}>
         <Tabs
           value={tab}
           onChange={(e, newValue) => setTab(newValue)}
           textColor="#c40f0fff"
           sx={{
-            "& .Mui-indicator":{color:"#c40f0fff"},
             "& .MuiTab-root": { color: "#FF5A5F" },
-            "& .Mui-selected": { color: "#c40f0fff", fontWeight:"bold" },
+            "& .Mui-selected": { color: "#c40f0fff", fontWeight: "bold" },
             "& .MuiTabs-indicator": { backgroundColor: "#FF5A5F" },
           }}
         >
@@ -70,10 +54,22 @@ const Cozinha = () => {
           <Tab label="Novo" />
           <Tab label="Em preparo" />
         </Tabs>
-        <OrdersList pedidos={filteredOrders()} onStatusChange={atualizarPedidos()} />
+
+        <OrdersList
+          pedidos={filteredOrders()}
+          onStatusChange={atualizarPedidos}
+          onDetalhesClick={setPedidoSelecionado}
+        />
       </Paper>
 
-      <Paper sx={{ width: 400, height: 120 }} elevation={3}></Paper>
+      {/* Painel de detalhes */}
+      <Paper sx={{ width: 500, p: 2 }} elevation={3}>
+        <DetalhesPedido
+          pedido={pedidoSelecionado}
+          pizzas={pizzas}
+          onClose={() => setPedidoSelecionado(null)}
+        />
+      </Paper>
     </Box>
   );
 };
