@@ -1,11 +1,15 @@
 import React from "react";
-import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Button, useMediaQuery} from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const isLoginPage = location.pathname === "/";
+  const theme = useTheme();
+
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
@@ -47,7 +51,7 @@ const Header = () => {
             alt="Logo"
             sx={{ height: 40, mr: 2 }}
           />
-          <Typography variant="h6">Pizzaria</Typography>
+          {!isSmallScreen && <Typography variant="h6">Pizzaria</Typography>}
         </Box>
 
         {/* Barra de navegação centralizada */}

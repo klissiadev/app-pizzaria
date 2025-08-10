@@ -7,6 +7,7 @@ const Admin = () => {
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
   return (
     <>
+      <div>Admin</div>
       {/*vou fazer um componente que avisa que ele não tem acesso a essa pagina*/}
       {!(usuarioLogado.tipo === "admin") &&(
         <div>não tenho acesso</div>

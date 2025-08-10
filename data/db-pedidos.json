@@ -1,0 +1,39 @@
+{
+  "pedidos": [
+    {
+      "id": "1",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": 2,
+          "nome": "Calabresa",
+          "ingredientes": [
+            "Calabresa",
+            "Cebola",
+            "Queijo mussarela",
+            "Molho de tomate"
+          ],
+          "tamanho": "Média",
+          "preco": 45,
+          "quantidade": 2
+        },
+        {
+          "nome": "Pizza Personalizada",
+          "tipo": "doce",
+          "ingredientes": [
+            "Chocolate",
+            "Morango"
+          ],
+          "tamanho": "Pequena",
+          "preco": 35,
+          "quantidade": 1
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": 7,
+      "endereco": null,
+      "data": "2025-08-07T18:00:00Z",
+      "status": "Em preparo"
+    }
+  ]
+}
