@@ -38,6 +38,7 @@ const Cozinha = () => {
 
   return (
     <Box sx={{ p: 2, display: "flex", gap: 2 }}>
+
       {/* Lista de pedidos */}
       <Paper sx={{ flex: 1, p: 1 }}>
         <Tabs

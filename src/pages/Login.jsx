@@ -73,10 +73,16 @@ const Login = () => {
         flexDirection: "column", // para organizar verticalmente
         minHeight: "90vh", // altura total
         width: "100%", // largura total
-        backgroundColor: "#ce9384ff"
+        backgroundColor: "#558858ff"
       }}
     >
       <Paper elevation={4} sx={{ p: 4, width: 350 }}>
+         <Box
+            component="img"
+            src="\imagens\logo&nome.png"
+            alt="Logo"
+            sx={{ height: 180 }}
+          />
         <Typography variant="h5" align="center" gutterBottom sx={{color:"#d32f2f"}}>
           Login
         </Typography>

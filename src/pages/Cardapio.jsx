@@ -39,7 +39,7 @@ const Cardapio = () => {
 
   useEffect(() => {
     axios
-      .get("api/db-pizzas")
+      .get("/db-pizzas")
       .then((response) => {
         console.log("Response completa:", response.data); //debug
         console.log("Array pizzas:", response.data.pizzas);
@@ -63,7 +63,7 @@ const Cardapio = () => {
 
   return (
     <Box sx={{ bgcolor: "#f5f5f5", minHeight: "100vh" }}>
-      <AppBar position="static" sx={{ bgcolor: "red" }}>
+      <AppBar position="static" sx={{ bgcolor: "#558858ff" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h6">Cardápio!</Typography>
           <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
@@ -71,8 +71,8 @@ const Cardapio = () => {
             <Button
               variant="contained"
               sx={{
-                bgcolor: "#0d7212ff",
-                "&:hover": { bgcolor: "#0aa91aff" },
+                bgcolor: "#a5140a",
+                "&:hover": { bgcolor: "#9a3730ff" },
               }}
             >
               Finalizar Pedido
@@ -85,14 +85,16 @@ const Cardapio = () => {
         {botoes.map(({ id, label }) => (
           <Button
             key={id}
-            variant="contained"
+            variant={filtrosAtivos.includes(id)? "contained" :"outlined"}
             onClick={() => handleClick(id)}
             sx={{
-              bgcolor: filtrosAtivos.includes(id) ? "#0d7212ff" : "#f50606ff",
+              bgcolor: filtrosAtivos.includes(id) ? "#0d7212ff" : "#fafafaff",
+              color: filtrosAtivos.includes(id) ? "#ffffffff" : "#0d7212ff",
+              borderColor: "#0d7212ff",
               borderRadius: "10px",
               p: 1,
               "&:hover": {
-                bgcolor: filtrosAtivos.includes(id) ? "#0f8c23" : "#0d7212ff",
+                bgcolor: filtrosAtivos.includes(id) ? "#0f8c23" : "#209926b1",
               },
             }}
           >
@@ -100,8 +102,6 @@ const Cardapio = () => {
           </Button>
         ))}
 
-        <TextField size="small" />
-        <TextField size="small" />
         <IconButton color="primary">
           <AddIcon />
         </IconButton>

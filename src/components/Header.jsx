@@ -52,7 +52,7 @@ const Header = () => {
             alt="Logo"
             sx={{ height: 40, mr: 2 }}
           />
-          {!isSmallScreen && <Typography variant="h6">Pizzaria</Typography>}
+          {!isSmallScreen && <Typography variant="h6">MammaMia Pizzaria</Typography>}
         </Box>
 
         {/* Barra de navegação centralizada */}
@@ -83,7 +83,7 @@ const Header = () => {
             color="inherit"
             variant="contained"
             onClick={handleLogout}
-            sx={{ fontWeight: "bold", backgroundColor:"rgba(165, 20, 10, 1)" }}
+            sx={{ fontWeight: "bold", backgroundColor:"#a5140a" }}
           >
             Sair
           </Button>
