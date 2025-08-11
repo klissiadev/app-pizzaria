@@ -45,7 +45,7 @@ const Login = () => {
     );
 
     if (usuarioEncontrado && usuarioEncontrado.senha === senha) {
-      const fakeToken = btoa(
+      const token = btoa(
         `${usuarioEncontrado.email}:${new Date().getTime()}`
       );
 
@@ -53,11 +53,11 @@ const Login = () => {
         nome: usuarioEncontrado.nome,
         email: usuarioEncontrado.email,
         tipo: usuarioEncontrado.tipo,
-        token: fakeToken
+        token: token
       };
 
       localStorage.setItem("usuarioLogado", JSON.stringify(usuarioAutenticado));
-      login(usuarioAutenticado, fakeToken);
+      login(usuarioAutenticado, token);
       navigate("/pages/cardapio");
     } else {
       setErro("E-mail ou senha inválidos.");

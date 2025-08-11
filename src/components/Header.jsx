@@ -40,14 +40,15 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#d32f2f" }}>
+    //{//mudar isso aqui}
+    <AppBar position="static" sx={{ backgroundColor: "#194216ff" }}> 
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         
         {/* Logo e título */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box
             component="img"
-            src="/logo.svg"
+            src="\imagens\logopizza.png"
             alt="Logo"
             sx={{ height: 40, mr: 2 }}
           />
