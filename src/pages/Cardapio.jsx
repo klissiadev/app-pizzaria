@@ -1,48 +1,33 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActions,
-  TextField,
-  Chip,
-  IconButton,
+  AppBar, Toolbar, Typography, Box, Button
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import PizzaCard from "../components/PizzaCard";
 
 const Cardapio = () => {
-  const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
   const [pizzas, setPizzas] = useState([]);
   const [filtrosAtivos, setFiltrosAtivos] = useState([]);
 
   const botoes = [
     { id: 1, label: "Tradicional" },
-    { id: 2, label: "Vegetariano" },
-    { id: 3, label: "Especialidade" },
+    { id: 2, label: "Especialidades" },
+    { id: 3, label: "Vegana" },
     { id: 4, label: "Doce" },
   ];
 
-  const handleClick = (id) => {
-    if (filtrosAtivos.includes(id)) {
-      setFiltrosAtivos(filtrosAtivos.filter((filtroId) => filtroId !== id));
-    } else {
-      setFiltrosAtivos([...filtrosAtivos, id]);
-    }
+  const handleClickFiltro = (id) => {
+    setFiltrosAtivos(prevFiltros =>
+      prevFiltros.includes(id)
+        ? prevFiltros.filter((filtroId) => filtroId !== id)
+        : [...prevFiltros, id]
+    );
   };
 
   useEffect(() => {
     axios
-      .get("/db-pizzas")
+      .get("/db-pizzas.json")
       .then((response) => {
-        console.log("Response completa:", response.data); //debug
-        console.log("Array pizzas:", response.data.pizzas);
         setPizzas(response.data.pizzas || []);
       })
       .catch((error) => {
@@ -65,19 +50,13 @@ const Cardapio = () => {
     <Box sx={{ bgcolor: "#f5f5f5", minHeight: "100vh" }}>
       <AppBar position="static" sx={{ bgcolor: "#558858ff" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Typography variant="h6">Cardápio!</Typography>
-          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-            <Chip label="#3450" sx={{ bgcolor: "#ffeaea" }} />
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: "#a5140a",
-                "&:hover": { bgcolor: "#9a3730ff" },
-              }}
-            >
-              Finalizar Pedido
-            </Button>
-          </Box>
+          <Typography variant="h6">Cardápio</Typography>
+          <Button
+            variant="contained"
+            sx={{ bgcolor: "#a5140a", "&:hover": { bgcolor: "#9a3730ff" } }}
+          >
+            Finalizar Pedido
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -85,76 +64,25 @@ const Cardapio = () => {
         {botoes.map(({ id, label }) => (
           <Button
             key={id}
-            variant={filtrosAtivos.includes(id)? "contained" :"outlined"}
-            onClick={() => handleClick(id)}
+            variant={filtrosAtivos.includes(id) ? "contained" : "outlined"}
+            onClick={() => handleClickFiltro(id)}
             sx={{
               bgcolor: filtrosAtivos.includes(id) ? "#0d7212ff" : "#fafafaff",
               color: filtrosAtivos.includes(id) ? "#ffffffff" : "#0d7212ff",
               borderColor: "#0d7212ff",
               borderRadius: "10px",
-              p: 1,
               "&:hover": {
-                bgcolor: filtrosAtivos.includes(id) ? "#0f8c23" : "#209926b1",
+                bgcolor: filtrosAtivos.includes(id) ? "#0f8c23" : "#e8f5e9",
               },
             }}
           >
             {label}
           </Button>
         ))}
-
-        <IconButton color="primary">
-          <AddIcon />
-        </IconButton>
       </Box>
 
-      <Grid>
-        {pizzasFiltradas.length > 0 ? (
-          pizzasFiltradas.map((pizza) => (
-            <Grid item xs={12} sm={6} md={3} key={pizza.id}>
-              <Card sx={{ border: "1px solid #ff9999" }}>
-                <CardMedia
-                  component="img"
-                  sx={{ height: 140, bgcolor: "#ccc" }}
-                  image={pizza.imagem}
-                  alt={pizza.nome}
-                />
-                <CardContent>
-                  <Typography variant="h6">{pizza.nome}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {pizza.descricao || pizza.ingredientes?.join(", ") || ""}
-                  </Typography>
-                  <Typography sx={{ color: "red", fontWeight: "bold" }}>
-                    R$
-                    {pizza.preco
-                      ? pizza.preco.toFixed(2).replace(".", ",")
-                      : "0,00"}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      bgcolor: "red",
-                      "&:hover": { bgcolor: "#d10000" },
-                    }}
-                    fullWidth
-                  >
-                    Pedir
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))
-        ) : (
-          <Typography sx={{ p: 2 }}>Nenhuma pizza encontrada.</Typography>
-        )}
-      </Grid>
+      <PizzaCard pizzas={pizzasFiltradas} />
 
-      {usuarioLogado?.tipo === "cliente" && (
-        <Typography align="center" sx={{ p: 2 }}>
-          Sou cliente
-        </Typography>
-      )}
     </Box>
   );
 };
