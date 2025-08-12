@@ -2,35 +2,52 @@ import React from "react";
 import { Card, CardContent, Typography, Button, Box, Chip } from "@mui/material";
 
 const statusColors = {
-  mesa: "warning",
+  mesa: "error",
   entrega: "success",
 };
 
 const actionColors = {
   Novo: "rgba(61, 122, 255, 1)",
   "Em preparo": "rgba(231, 129, 44, 1)",
-  Entrege: "rgba(52, 185, 52, 1)",
-  Servido: "rgba(116, 59, 59, 1)",
+  Entregar: "rgba(196, 64, 54, 1)",
+  Servir: "rgba(38, 99, 48, 1)",
+  Finalizado : "rgba(36, 36, 36, 1)"
 };
 
 export default function OrderCard({ pedido, onStatusChange, onDetalhesClick }) {
   const mudarStatusEDetalhes = async (pedido) => {
-    try {
-      await fetch(`http://localhost:3001/pedidos/${pedido.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "Em preparo" }),
-      });
-      if (onStatusChange) onStatusChange();
+  try {
+    if (pedido.status !== "Novo") {
+      // Se não for "Novo", só abre os detalhes sem mudar status
       if (onDetalhesClick) onDetalhesClick(pedido);
-    } catch (err) {
-      console.error("Erro ao mudar status:", err);
+      return;
     }
-  };
+
+    await fetch(`http://localhost:3001/pedidos/${pedido.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "Em preparo" }),
+    });
+
+    if (onStatusChange) onStatusChange();
+    if (onDetalhesClick) onDetalhesClick({ ...pedido, status: "Em preparo" });
+  } catch (err) {
+    console.error("Erro ao mudar status:", err);
+  }
+};
+
 
   return (
     <Card variant="outlined" sx={{ mb: 1 }}>
-      <CardContent sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
+          gap: { xs: 1, sm: 0 }
+        }}
+      >
         <Box>
           <Typography variant="subtitle1" sx={{ fontWeight: "bold", textAlign:"left"}}>
             Pedido #{pedido.id}{" "}
@@ -48,7 +65,7 @@ export default function OrderCard({ pedido, onStatusChange, onDetalhesClick }) {
 
         <Box
           sx={{
-            width: "100px",
+            width: { xs: "100%", sm: "100px"},
             bgcolor: actionColors[pedido.status] || "primary.main",
             color: "white",
             display: "flex",
@@ -56,8 +73,7 @@ export default function OrderCard({ pedido, onStatusChange, onDetalhesClick }) {
             justifyContent: "center",
             textAlign: "center",
             fontFamily: "sans-serif",
-            p: 1,
-            borderRadius: 1,
+            pt:1, pb:1
           }}
         >
           {pedido.status}
@@ -65,9 +81,8 @@ export default function OrderCard({ pedido, onStatusChange, onDetalhesClick }) {
 
         <Button
           variant="outlined"
-          size="small"
+          sx={{ width: { xs: "100%", sm: "100px"}}}
           color="error"
-          sx={{ p: 1 }}
           onClick={() => mudarStatusEDetalhes(pedido)}
         >
           Detalhes

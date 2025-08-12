@@ -26,21 +26,32 @@ const Cozinha = () => {
   }
 
   const filteredOrders = () => {
-    if (tab === 0) return pedidos;
-    if (tab === 1) return pedidos.filter((o) => o.status === "Novo");
-    if (tab === 2) return pedidos.filter((o) => o.status === "Em preparo");
-    return [];
-  };
+  const pedidosFiltrados = pedidos.filter(
+    o => o.status === "Novo" || o.status === "Em preparo"
+  );
+
+  if (tab === 0) return pedidosFiltrados;
+  if (tab === 1) return pedidosFiltrados.filter(o => o.status === "Novo");
+  if (tab === 2) return pedidosFiltrados.filter(o => o.status === "Em preparo");
+  return [];
+};
+
 
   if (!(usuarioLogado?.tipo === "funcionario")) {
     return <div>Não tenho acesso</div>;
   }
 
   return (
-    <Box sx={{ p: 2, display: "flex", gap: 2 }}>
-
+    <Box
+      sx={{
+        padding:{xs:0, md:2},
+        display: "flex",
+        gap: 2,
+        flexDirection: { xs: "column", md: "row" } // coluna no mobile, lado a lado no desktop
+      }}
+    >
       {/* Lista de pedidos */}
-      <Paper sx={{ flex: 1, p: 1 }}>
+      <Paper sx={{ flex: 1, width: { xs: "100%", md: "auto" } }}>
         <Tabs
           value={tab}
           onChange={(e, newValue) => setTab(newValue)}
@@ -64,11 +75,12 @@ const Cozinha = () => {
       </Paper>
 
       {/* Painel de detalhes */}
-      <Paper sx={{ width: 500, p: 2 }} elevation={3}>
+      <Paper sx={{ width: { xs: "100%", md: 500 , padding:{xs:0, md:2}}}} elevation={3}>
         <DetalhesPedido
           pedido={pedidoSelecionado}
           pizzas={pizzas}
           onClose={() => setPedidoSelecionado(null)}
+          onStatusChange={atualizarPedidos}
         />
       </Paper>
     </Box>

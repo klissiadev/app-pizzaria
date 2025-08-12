@@ -3,7 +3,7 @@ import { Box, Tabs, Tab, Paper } from "@mui/material";
 import OrdersList from "../components/OrderList";
 import DetalhesPedido from "../components/DetalhesPedido";
 
-const Entregas = () => {
+const HistoricoPedidos = () => {
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
   const [tab, setTab] = useState(0);
   const [pedidos, setPedidos] = useState([]);
@@ -27,24 +27,22 @@ const Entregas = () => {
 
   const filteredOrders = () => {
   const pedidosFiltrados = pedidos.filter(
-    o => o.status === "Servir" || o.status === "Entregar"
+    o => o.status === "Finalizado"
   );
 
-  if (tab === 0) return pedidosFiltrados;
-  if (tab === 1) return pedidosFiltrados.filter(o => o.status === "Servir");
-  if (tab === 2) return pedidosFiltrados.filter(o => o.status === "Entregar");
+  if (tab === 0) return pedidosFiltrados.filter(o => o.status === "Finalizado");
   return [];
 };
 
 
-  if (!(usuarioLogado?.tipo === "funcionario")) {
+  if (!(usuarioLogado?.tipo === "admin")) {
     return <div>Não tenho acesso</div>;
   }
 
   return (
     <Box
       sx={{
-        padding:{xs:0, md:2},
+        p: 2,
         display: "flex",
         gap: 2,
         flexDirection: { xs: "column", md: "row" } // coluna no mobile, lado a lado no desktop
@@ -52,7 +50,7 @@ const Entregas = () => {
     >
 
       {/* Lista de pedidos */}
-      <Paper sx={{ flex: 1, width: { xs: "100%", md: "auto" } }}>
+      <Paper sx={{ flex: 1, p: 2, width: { xs: "100%", md: "auto" } }}>
         <Tabs
           value={tab}
           onChange={(e, newValue) => setTab(newValue)}
@@ -64,8 +62,6 @@ const Entregas = () => {
           }}
         >
           <Tab label="Tudo" />
-          <Tab label="Servido" />
-          <Tab label="Entregue" />
         </Tabs>
 
         <OrdersList
@@ -76,7 +72,7 @@ const Entregas = () => {
       </Paper>
 
       {/* Painel de detalhes */}
-      <Paper sx={{ width: { xs: "100%", md: 500 }, padding:{xs:0, md:2} }} elevation={3}>
+      <Paper sx={{ width: { xs: "100%", md: 500 }, p: 2 }} elevation={3}>
         <DetalhesPedido
           pedido={pedidoSelecionado}
           pizzas={pizzas}
@@ -89,4 +85,4 @@ const Entregas = () => {
   );
 };
 
-export default Entregas;
+export default HistoricoPedidos;

@@ -29,7 +29,8 @@ const Header = () => {
     } else if (usuarioLogado.tipo === "admin") {
       navLinks = [
         { label: "Cardápio", to: "/pages/cardapio" },
-        { label: "Admin", to: "/pages/admin" }
+        { label: "Admin", to: "/pages/admin" },
+        { label: "Histórico de Pedidos", to: "/pages/historicoPedidos"}
       ];
     }
   }
@@ -41,7 +42,7 @@ const Header = () => {
 
   return (
     //{//mudar isso aqui}
-    <AppBar position="static" sx={{ backgroundColor: "#194216ff" }}> 
+    <AppBar position="static" width="100%" sx={{ backgroundColor: "#194216ff" }}> 
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         
         {/* Logo e título */}

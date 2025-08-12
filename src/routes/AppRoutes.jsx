@@ -9,6 +9,7 @@ import Cozinha from '../pages/Cozinha';
 import Entregas from '../pages/Entregas';
 import NotFound from '../pages/NotFound';
 import Pedido from '../pages/Pedido';
+import HistoricoPedidos from '../pages/HistoricoPedidos';
 
 const AppRoutes = () => (
   <Routes>
@@ -26,6 +27,14 @@ const AppRoutes = () => (
       element={
         <ProtectedRoute>
           <Admin />
+        </ProtectedRoute>
+      } 
+    />
+    <Route 
+      path="/pages/historicoPedidos" 
+      element={
+        <ProtectedRoute>
+          <HistoricoPedidos/>
         </ProtectedRoute>
       } 
     />

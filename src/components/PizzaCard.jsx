@@ -53,15 +53,6 @@ const PizzaCard = ({ pizzas }) => {
     toast.success(`${pizzaSelecionada.nome} (${tamanho}) adicionada ao carrinho!`);
     handleFecharDetalhes();
   };
-  
-  if (usuarioLogado.tipo !== "cliente") {
-    return (
-        <Box sx={{ p: 4, textAlign: 'center' }}>
-            <Typography variant="h5">Acesso Restrito</Typography>
-            <Typography>Você precisa estar logado como cliente para ver o cardápio.</Typography>
-        </Box>
-    );
-  }
 
   return (
     <div>
@@ -87,11 +78,13 @@ const PizzaCard = ({ pizzas }) => {
                   R$ {pizza.preco.toFixed(2).replace(".", ",")}
                 </Typography>
               </CardContent>
+              {(usuarioLogado.tipo === "cliente") && (
               <CardActions>
-                <Button variant="outlined" fullWidth onClick={() => handleAbrirDetalhes(pizza)}>
+                <Button variant="outlined" color='success' fullWidth onClick={() => handleAbrirDetalhes(pizza)}>
                   Selecionar
                 </Button>
               </CardActions>
+              )}
             </Card>
           ))
         ) : (
