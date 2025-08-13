@@ -4,13 +4,13 @@ Aplicação web para gerenciamento de pedidos de uma pizzaria com uso de React.
 
 ## Descrição
 
--Funcionalidades
+-- Funcionalidades
 
--Login de usuários
--Diferenciação entre cliente e administrador
+- Login de usuários
+- Diferenciação entre cliente e administrador
 - Visualização e seleção de pizzas
 - Carrinho de compras e finalização de pedido
-- Controle de status dos pedidos no painel admin
+- Controle de status dos pedidos no painel funcionário
 - Notificações em tempo real
 - Tema claro e escuro
 
@@ -23,7 +23,7 @@ Aplicação web para gerenciamento de pedidos de uma pizzaria com uso de React.
 
 ## Instalação Front-end
 cd app-pizzaria
-nom install
+npm install
 npm run dev
 
 ## Instalação Back-end
@@ -33,6 +33,7 @@ npx json-server --watch dp-pedidos.json --port 3001
 npx json-server --watch dp-pizzas.json --port 3002
 
 ## Estrutura de Pastas
+
 app-pizzaria/
 ├── data/
 ├── public/
@@ -65,3 +66,6 @@ app-pizzaria/
 │   └── index.css
 ├── package.json
 └── vite.config.js
+
+## Observações
+- Para a instalação, é preciso abrir 3 terminais diferentes, todos no caminho cd app-pizzaria.

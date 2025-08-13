@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { Box, Stack, Button, TableCell, Paper , TableContainer, Table, TableHead, TableRow, TableBody, CardActions} from "@mui/material";
 import { Add } from "@mui/icons-material";
 import PizzaDialog from "../components/PizzaDialog";
+import NotFound from "../pages/NotFound";
 
 
 const Admin = () => {
@@ -30,6 +31,7 @@ const Admin = () => {
     setEditing(pizza);
     setOpen(true);
   };
+
 
   const handleDelete = async (id) => {
     if (!window.confirm("Tem certeza que deseja deletar essa pizza?")) return;
@@ -70,13 +72,13 @@ const Admin = () => {
     setOpen(false);
   };
 
+  if (!(usuarioLogado.tipo === "admin")){
+    return (<NotFound />)}
 
   return (
     <>
       {/*vou fazer um componente que avisa que ele não tem acesso a essa pagina*/}
-      {!(usuarioLogado.tipo === "admin") &&(
-        <div>não tenho acesso</div>
-      )}
+      
       {(usuarioLogado.tipo === "admin") &&(
         <Box p={2} >
           <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" mb={2} >

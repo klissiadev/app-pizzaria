@@ -9,6 +9,7 @@ import {
   Button,
   Chip
 } from "@mui/material";
+import { toast } from "react-toastify";
 
 const DetalhesPedido = ({ pedido, onClose, onStatusChange }) => {
   const [pizzas, setPizzas] = useState([]);
@@ -59,7 +60,7 @@ const DetalhesPedido = ({ pedido, onClose, onStatusChange }) => {
         // Fecha os detalhes
         onClose();
       } catch (err) {
-        console.error("Erro ao mudar status:", err);
+        toast.error(console.error("Erro ao mudar status:", err));
       }
     }
   };

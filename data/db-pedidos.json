@@ -269,6 +269,26 @@
       "endereco": null,
       "total": 39.48,
       "status": "Novo"
+    },
+    {
+      "id": "11",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "1",
+          "nome": "Margherita",
+          "observacao": "sem cebola",
+          "tamanho": "Média",
+          "preco": "39.48",
+          "quantidade": 1,
+          "total": 39.48
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "4",
+      "endereco": null,
+      "total": 39.48,
+      "status": "Novo"
     }
   ]
 }

@@ -40,7 +40,7 @@ const NotFound = () => {
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 4, maxWidth: 400 }}>
-        A página que você está tentando acessar não existe ou foi removida.
+        A página que você está tentando acessar não existe, foi removida ou você não tem acesso.
       </Typography>
 
       <Button
