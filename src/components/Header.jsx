@@ -18,7 +18,7 @@ const Header = () => {
     if (usuarioLogado.tipo === "cliente") {
       navLinks = [
         { label: "Cardápio", to: "/pages/cardapio" },
-        { label: "Pedidos", to: "/pages/pedidos" }
+        { label: "Pedidos", to: "/pages/pedido" }
       ];
     } else if (usuarioLogado.tipo === "funcionario") {
       navLinks = [

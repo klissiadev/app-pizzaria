@@ -5,206 +5,125 @@
       "usuarioId": 2,
       "itens": [
         {
-          "pizzaId": 2,
-          "nome": "Calabresa",
-          "observacao": [
-            "Sem cebola",
-            "Sem calabresa"
-          ],
+          "pizzaId": "8",
+          "nome": "Vegana de Legumes",
+          "observacao": [],
           "tamanho": "Média",
-          "preco": 45,
-          "quantidade": 2
+          "preco": "48.00",
+          "quantidade": 1,
+          "total": 48
         },
         {
-          "nome": "Pizza Personalizada",
-          "tipo": "doce",
-          "observacao": [
-            "Chocolate",
-            "Morango"
-          ],
-          "tamanho": "Pequena",
-          "preco": 35,
-          "quantidade": 1
+          "pizzaId": "6",
+          "nome": "Banana com Canela",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "37.80",
+          "quantidade": 2,
+          "total": 75.6
         }
       ],
       "tipoEntrega": "mesa",
-      "numeroMesa": 7,
+      "numeroMesa": "5",
       "endereco": null,
-      "status": "Servir"
+      "total": 123.6,
+      "status": "Finalizado"
     },
     {
       "id": "2",
       "usuarioId": 2,
       "itens": [
         {
-          "pizzaId": 3,
-          "nome": "Frango com Catupiry",
-          "observacao": [
-            null
-          ],
-          "tamanho": "Pequena",
-          "preco": 45,
-          "quantidade": 2
-        },
-        {
-          "pizzaId": 6,
-          "nome": "Banana com Canela",
-          "observacao": [
-            "Sem Leite Condensado"
-          ],
-          "tamanho": "Pequena",
-          "preco": 35,
-          "quantidade": 1
-        },
-        {
-          "pizzaId": 8,
-          "nome": "Vegana de Legumes",
-          "observacao": [
-            "Sem Cebola"
-          ],
-          "tamanho": "Grande",
-          "preco": 35,
-          "quantidade": 1
-        }
-      ],
-      "tipoEntrega": "entrega",
-      "numeroMesa": null,
-      "endereco": "Rua 12, 210, Coroado",
-      "status": "Novo"
-    },
-    {
-      "id": "3",
-      "usuarioId": 5,
-      "itens": [
-        {
-          "pizzaId": 1,
-          "nome": "Margherita",
-          "observacao": [
-            "Extra manjericão"
-          ],
-          "tamanho": "Grande",
-          "preco": 50,
-          "quantidade": 1
-        }
-      ],
-      "tipoEntrega": "mesa",
-      "numeroMesa": 3,
-      "endereco": null,
-      "status": "Em preparo"
-    },
-    {
-      "id": "4",
-      "usuarioId": 6,
-      "itens": [
-        {
-          "pizzaId": 5,
-          "nome": "Chocolate com Morango",
-          "observacao": [
-            "Sem granulado"
-          ],
-          "tamanho": "Média",
-          "preco": 40,
-          "quantidade": 2
-        }
-      ],
-      "tipoEntrega": "entrega",
-      "numeroMesa": null,
-      "endereco": "Av. Brasil, 123",
-      "status": "Novo"
-    },
-    {
-      "id": "5",
-      "usuarioId": 4,
-      "itens": [
-        {
-          "pizzaId": 4,
-          "nome": "Quatro Queijos",
+          "pizzaId": "14",
+          "nome": "Churros",
           "observacao": [],
           "tamanho": "Grande",
-          "preco": 60,
-          "quantidade": 1
+          "preco": "60.00",
+          "quantidade": 1,
+          "total": 60
         },
         {
-          "pizzaId": 14,
-          "nome": "Churros",
-          "observacao": [
-            "Extra doce de leite"
-          ],
-          "tamanho": "Pequena",
-          "preco": 35,
-          "quantidade": 1
-        }
-      ],
-      "tipoEntrega": "mesa",
-      "numeroMesa": 10,
-      "endereco": null,
-      "status": "Novo"
-    },
-    {
-      "id": "6",
-      "usuarioId": 3,
-      "itens": [
-        {
-          "pizzaId": 12,
-          "nome": "Pepperrock",
-          "observacao": [
-            "Sem alho"
-          ],
-          "tamanho": "Média",
-          "preco": 55,
-          "quantidade": 1
-        }
-      ],
-      "tipoEntrega": "entrega",
-      "numeroMesa": null,
-      "endereco": "Rua das Flores, 98",
-      "status": "Entregar"
-    },
-    {
-      "id": "7",
-      "usuarioId": 7,
-      "itens": [
-        {
-          "pizzaId": 11,
+          "pizzaId": "11",
           "nome": "Cheddar & Bacon",
           "observacao": [],
           "tamanho": "Grande",
-          "preco": 65,
-          "quantidade": 2
-        }
-      ],
-      "tipoEntrega": "mesa",
-      "numeroMesa": 5,
-      "endereco": null,
-      "status": "Aguardando pagamento"
-    },
-    {
-      "id": "8",
-      "usuarioId": 8,
-      "itens": [
-        {
-          "pizzaId": 15,
-          "nome": "Abobrinha",
-          "observacao": [
-            "Sem alho"
-          ],
-          "tamanho": "Média",
-          "preco": 48,
-          "quantidade": 1
+          "preco": "62.85",
+          "quantidade": 1,
+          "total": 62.849999999999994
         },
         {
-          "pizzaId": 13,
-          "nome": "Pistache",
+          "pizzaId": "4",
+          "nome": "Quatro Queijos",
           "observacao": [],
-          "tamanho": "Pequena",
-          "preco": 42,
-          "quantidade": 1
+          "tamanho": "Grande",
+          "preco": "63.00",
+          "quantidade": 1,
+          "total": 63
         }
       ],
       "tipoEntrega": "entrega",
       "numeroMesa": null,
-      "endereco": "Rua Verde, 456",
-      "status": "Em preparo"
+      "endereco": "Rua Amarando, 34, Barra",
+      "total": 185.85,
+      "status": "Entregar"
+    },
+    {
+      "id": "3",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "3",
+          "nome": "Frango com Catupiry",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "47.88",
+          "quantidade": 1,
+          "total": 47.879999999999995
+        },
+        {
+          "pizzaId": "9",
+          "nome": "Portuguesa",
+          "observacao": [],
+          "tamanho": "Pequena",
+          "preco": "41.50",
+          "quantidade": 1,
+          "total": 41.5
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "2",
+      "endereco": null,
+      "total": 89.38,
+      "status": "Novo"
+    },
+    {
+      "id": "4",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "4",
+          "nome": "Quatro Queijos",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "50.40",
+          "quantidade": 1,
+          "total": 50.4
+        },
+        {
+          "pizzaId": "1",
+          "nome": "Margherita",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "39.48",
+          "quantidade": 1,
+          "total": 39.48
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "3",
+      "endereco": null,
+      "total": 89.88,
+      "status": "Novo"
     }
   ]
 }

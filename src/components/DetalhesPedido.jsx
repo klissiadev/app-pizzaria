@@ -14,11 +14,12 @@ const DetalhesPedido = ({ pedido, onClose, onStatusChange }) => {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    fetch("/db-pizzas.json")
+    fetch("http://localhost:3002/pizzas")
       .then(res => res.json())
-      .then(data => setPizzas(data.pizzas || []))
+      .then(data => setPizzas(data || []))
       .catch(err => console.error("Erro ao carregar pizzas:", err));
   }, []);
+
 
   if (!pedido) {
     return (
@@ -97,7 +98,7 @@ const DetalhesPedido = ({ pedido, onClose, onStatusChange }) => {
         <Divider sx={{ my: 1 }} />
 
         {pedido.itens.map((item, idx) => {
-          const pizzaInfo = pizzas.find(p => p.id === item.pizzaId);
+          const pizzaInfo = pizzas.find(p => String(p.id) === String(item.pizzaId));
           return (
             <Box key={idx} display="flex" alignItems="center" gap={2} mb={1}>
               <Typography variant="body2" color="#d32f2f">
@@ -105,8 +106,10 @@ const DetalhesPedido = ({ pedido, onClose, onStatusChange }) => {
               </Typography>
               <Avatar
                 src={
-                  pizzaInfo
-                    ? `/imagens/${pizzaInfo.imagem}`
+                  pizzaInfo && pizzaInfo.imagem
+                    ? pizzaInfo.imagem.startsWith("http")
+                      ? pizzaInfo.imagem
+                      : `/imagens/${pizzaInfo.imagem}`
                     : "/imagens/pizza.png"
                 }
                 variant="square"
@@ -133,6 +136,18 @@ const DetalhesPedido = ({ pedido, onClose, onStatusChange }) => {
             </Box>
           );
         })}
+
+        <Divider sx={{ my: 1 }} />
+        <Box flexDirection="row" display="flex" justifyContent="space-between">
+          <Typography variant="h6"  textAlign={"right"}>
+            Total
+          </Typography>
+          <Typography variant="h6" color="error" textAlign={"left"}>
+          R$ {pedido.total.toFixed(2).replace(".", ",")}
+          </Typography>
+        </Box>
+        
+
         {!(getButtonLabel() === "") &&(
         <Button
           fullWidth
