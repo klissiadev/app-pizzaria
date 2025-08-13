@@ -4,6 +4,7 @@ import {
   AppBar, Toolbar, Typography, Box, Button
 } from "@mui/material";
 import PizzaCard from "../components/PizzaCard";
+import { toast } from "react-toastify";
 
 const Cardapio = () => {
   const [pizzas, setPizzas] = useState([]);
@@ -22,6 +23,13 @@ const Cardapio = () => {
         ? prevFiltros.filter((filtroId) => filtroId !== id)
         : [...prevFiltros, id]
     );
+  };
+
+  const finalizarPedido = () => {
+    toast.sucess("Pedido finalizado com sucesso!", {
+      position: toast.position.top_right,
+      autoClose: 3000,
+    });
   };
 
   useEffect(() => {
@@ -47,13 +55,17 @@ const Cardapio = () => {
       : pizzas;
 
   return (
-    <Box sx={{ bgcolor: "#f5f5f5", minHeight: "100vh" }}>
+    <Box sx={(theme) => ({
+      bgcolor: theme.palette.background.default,
+      minHeight: "100vh",
+    })}>
       <AppBar position="static" sx={{ bgcolor: "#558858ff" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h6">Cardápio</Typography>
           <Button
             variant="contained"
-            sx={{ bgcolor: "#a5140a", "&:hover": { bgcolor: "#9a3730ff" } }}
+            sx={{ color: "#ffffff", bgcolor: "#a5140a", "&:hover": { bgcolor: "#9a3730ff" } }}
+            onClick={finalizarPedido}
           >
             Finalizar Pedido
           </Button>
@@ -61,25 +73,26 @@ const Cardapio = () => {
       </AppBar>
 
       <Box sx={{ display: "flex", gap: 2, p: 2, flexWrap: "wrap" }}>
-        {botoes.map(({ id, label }) => (
-          <Button
-            key={id}
-            variant={filtrosAtivos.includes(id) ? "contained" : "outlined"}
-            onClick={() => handleClickFiltro(id)}
-            sx={{
-              bgcolor: filtrosAtivos.includes(id) ? "#0d7212ff" : "#fafafaff",
-              color: filtrosAtivos.includes(id) ? "#ffffffff" : "#0d7212ff",
-              borderColor: "#0d7212ff",
-              borderRadius: "10px",
-              "&:hover": {
-                bgcolor: filtrosAtivos.includes(id) ? "#0f8c23" : "#e8f5e9",
-              },
-            }}
-          >
-            {label}
-          </Button>
-        ))}
-      </Box>
+  {botoes.map(({ id, label }) => (
+    <Button
+      key={id}
+      variant={filtrosAtivos.includes(id) ? "contained" : "outlined"}
+      onClick={() => handleClickFiltro(id)}
+      sx={(theme) => ({
+        bgcolor: filtrosAtivos.includes(id) ? "#0d7212ff" : theme.palette.background.default,
+        color: filtrosAtivos.includes(id) ? "#ffffff" : "#0d7212ff",
+        borderColor: "#0d7212ff",
+        borderRadius: "10px",
+        "&:hover": {
+          bgcolor: filtrosAtivos.includes(id) ? "#0f8c23" : "#e8f5e9",
+        },
+      })}
+    >
+      {label}
+    </Button>
+  ))}
+</Box>
+
 
       <PizzaCard pizzas={pizzasFiltradas} />
 
