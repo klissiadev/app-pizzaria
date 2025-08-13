@@ -10,16 +10,15 @@ import {
   Chip
 } from "@mui/material";
 
-const DetalhesPedido = ({ pedido, onClose }) => {
+const DetalhesPedido = ({ pedido, onClose, onStatusChange }) => {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
     fetch("/db-pizzas.json")
-        .then(res => res.json())
-        .then(data => setPizzas(data.pizzas || []))
-        .catch(err => console.error("Erro ao carregar pizzas:", err));
-    }, []);
-
+      .then(res => res.json())
+      .then(data => setPizzas(data.pizzas || []))
+      .catch(err => console.error("Erro ao carregar pizzas:", err));
+  }, []);
 
   if (!pedido) {
     return (
@@ -29,9 +28,44 @@ const DetalhesPedido = ({ pedido, onClose }) => {
     );
   }
 
+  const getButtonLabel = () => {
+    if (pedido.status === "Novo" || pedido.status === "Em preparo") return "Pedido Pronto";
+    if (pedido.status === "Servir") return "Servido";
+    if (pedido.status === "Entregar") return "Entregue";
+    return "";
+  };
+
+  const handleFinalizar = async () => {
+    let novoStatus = pedido.status;
+
+    if (pedido.status === "Novo" || pedido.status === "Em preparo") {
+      novoStatus = pedido.tipoEntrega === "mesa" ? "Servir" : "Entregar";
+    } else if (pedido.status === "Servir" || pedido.status === "Entregar") {
+      novoStatus = "Finalizado";
+    }
+
+    if (novoStatus !== pedido.status) {
+      try {
+        await fetch(`http://localhost:3001/pedidos/${pedido.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: novoStatus }),
+        });
+
+        // Atualiza a lista da tela
+        if (onStatusChange) onStatusChange();
+
+        // Fecha os detalhes
+        onClose();
+      } catch (err) {
+        console.error("Erro ao mudar status:", err);
+      }
+    }
+  };
+
   return (
-    <Card sx={{ borderRadius: 3 }}>
-      <CardContent>
+    <Card sx={{ borderRadius: 3, width: "100%" }}>
+      <CardContent sx={{ p: { xs: 1, sm: 2 } }}>
         <Typography variant="h6" fontWeight="bold">
           Pedido #{pedido.id}{" "}
           <Chip
@@ -41,25 +75,24 @@ const DetalhesPedido = ({ pedido, onClose }) => {
           />
         </Typography>
 
-          <Box display="flex" alignItems="center" gap={1} mt={1}>
-            <Avatar
-              src="/imagens/local.png"
-              alt="Local"
-              variant="square"
-              sx={{ width: 24, height: 24 }}
-            />
-            {pedido.tipoEntrega === "mesa" && (
-                <Typography variant="body1">
-                    Mesa {pedido.numeroMesa}
-                </Typography>
-            )}
-            {pedido.tipoEntrega === "entrega" && (
-                <Typography variant="body1">
-                    {pedido.endereco}
-                </Typography>
-            )}
-          </Box>
-    
+        <Box display="flex" alignItems="center" gap={1} mt={1}>
+          <Avatar
+            src="/imagens/local.png"
+            alt="Local"
+            variant="square"
+            sx={{ width: 24, height: 24 }}
+          />
+          {pedido.tipoEntrega === "mesa" && (
+            <Typography variant="body1">
+              Mesa {pedido.numeroMesa}
+            </Typography>
+          )}
+          {pedido.tipoEntrega === "entrega" && (
+            <Typography variant="body1">
+              {pedido.endereco}
+            </Typography>
+          )}
+        </Box>
 
         <Divider sx={{ my: 1 }} />
 
@@ -67,9 +100,9 @@ const DetalhesPedido = ({ pedido, onClose }) => {
           const pizzaInfo = pizzas.find(p => p.id === item.pizzaId);
           return (
             <Box key={idx} display="flex" alignItems="center" gap={2} mb={1}>
-                <Typography variant="body2" color="#d32f2f">
-                    {item.quantidade}x
-                </Typography>
+              <Typography variant="body2" color="#d32f2f">
+                {item.quantidade}x
+              </Typography>
               <Avatar
                 src={
                   pizzaInfo
@@ -89,26 +122,27 @@ const DetalhesPedido = ({ pedido, onClose }) => {
               </Box>
               <Box ml="auto" textAlign="right">
                 {item.observacao && item.observacao.length > 0 && (
-                    <Typography variant="caption" textAlign="rigth" sx={{ display: "block" }}>
-                        Obs:{" "}
-                        {Array.isArray(item.observacao)
-                        ? item.observacao.join(", ")
-                        : item.observacao}
-                    </Typography>
-                    )}
-                </Box>
+                  <Typography variant="caption" textAlign="rigth" sx={{ display: "block" }}>
+                    Obs:{" "}
+                    {Array.isArray(item.observacao)
+                      ? item.observacao.join(", ")
+                      : item.observacao}
+                  </Typography>
+                )}
+              </Box>
             </Box>
           );
         })}
-
+        {!(getButtonLabel() === "") &&(
         <Button
           fullWidth
           variant="contained"
           sx={{ mt: 2, backgroundColor: "#FF5A5F" }}
-          onClick={onClose}
+          onClick={handleFinalizar}
         >
-          Fechar
+          {getButtonLabel()}
         </Button>
+        )}
       </CardContent>
     </Card>
   );

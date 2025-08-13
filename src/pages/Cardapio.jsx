@@ -7,6 +7,7 @@ import PizzaCard from "../components/PizzaCard";
 import { toast } from "react-toastify";
 
 const Cardapio = () => {
+  const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado")) || {};
   const [pizzas, setPizzas] = useState([]);
   const [filtrosAtivos, setFiltrosAtivos] = useState([]);
 
@@ -54,6 +55,15 @@ const Cardapio = () => {
         )
       : pizzas;
 
+    if ((usuarioLogado === null)) {
+      return (
+          <Box sx={{ p: 4, textAlign: 'center' }}>
+              <Typography variant="h5">Acesso Restrito</Typography>
+              <Typography>Você precisa estar logado como cliente para ver o cardápio.</Typography>
+          </Box>
+      );
+    }
+  
   return (
     <Box sx={(theme) => ({
       bgcolor: theme.palette.background.default,

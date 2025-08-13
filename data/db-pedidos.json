@@ -30,7 +30,7 @@
       "tipoEntrega": "mesa",
       "numeroMesa": 7,
       "endereco": null,
-      "status": "Em preparo"
+      "status": "Servir"
     },
     {
       "id": "2",
@@ -70,6 +70,140 @@
       "tipoEntrega": "entrega",
       "numeroMesa": null,
       "endereco": "Rua 12, 210, Coroado",
+      "status": "Novo"
+    },
+    {
+      "id": "3",
+      "usuarioId": 5,
+      "itens": [
+        {
+          "pizzaId": 1,
+          "nome": "Margherita",
+          "observacao": [
+            "Extra manjericão"
+          ],
+          "tamanho": "Grande",
+          "preco": 50,
+          "quantidade": 1
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": 3,
+      "endereco": null,
+      "status": "Em preparo"
+    },
+    {
+      "id": "4",
+      "usuarioId": 6,
+      "itens": [
+        {
+          "pizzaId": 5,
+          "nome": "Chocolate com Morango",
+          "observacao": [
+            "Sem granulado"
+          ],
+          "tamanho": "Média",
+          "preco": 40,
+          "quantidade": 2
+        }
+      ],
+      "tipoEntrega": "entrega",
+      "numeroMesa": null,
+      "endereco": "Av. Brasil, 123",
+      "status": "Novo"
+    },
+    {
+      "id": "5",
+      "usuarioId": 4,
+      "itens": [
+        {
+          "pizzaId": 4,
+          "nome": "Quatro Queijos",
+          "observacao": [],
+          "tamanho": "Grande",
+          "preco": 60,
+          "quantidade": 1
+        },
+        {
+          "pizzaId": 14,
+          "nome": "Churros",
+          "observacao": [
+            "Extra doce de leite"
+          ],
+          "tamanho": "Pequena",
+          "preco": 35,
+          "quantidade": 1
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": 10,
+      "endereco": null,
+      "status": "Novo"
+    },
+    {
+      "id": "6",
+      "usuarioId": 3,
+      "itens": [
+        {
+          "pizzaId": 12,
+          "nome": "Pepperrock",
+          "observacao": [
+            "Sem alho"
+          ],
+          "tamanho": "Média",
+          "preco": 55,
+          "quantidade": 1
+        }
+      ],
+      "tipoEntrega": "entrega",
+      "numeroMesa": null,
+      "endereco": "Rua das Flores, 98",
+      "status": "Entregar"
+    },
+    {
+      "id": "7",
+      "usuarioId": 7,
+      "itens": [
+        {
+          "pizzaId": 11,
+          "nome": "Cheddar & Bacon",
+          "observacao": [],
+          "tamanho": "Grande",
+          "preco": 65,
+          "quantidade": 2
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": 5,
+      "endereco": null,
+      "status": "Aguardando pagamento"
+    },
+    {
+      "id": "8",
+      "usuarioId": 8,
+      "itens": [
+        {
+          "pizzaId": 15,
+          "nome": "Abobrinha",
+          "observacao": [
+            "Sem alho"
+          ],
+          "tamanho": "Média",
+          "preco": 48,
+          "quantidade": 1
+        },
+        {
+          "pizzaId": 13,
+          "nome": "Pistache",
+          "observacao": [],
+          "tamanho": "Pequena",
+          "preco": 42,
+          "quantidade": 1
+        }
+      ],
+      "tipoEntrega": "entrega",
+      "numeroMesa": null,
+      "endereco": "Rua Verde, 456",
       "status": "Em preparo"
     }
   ]
