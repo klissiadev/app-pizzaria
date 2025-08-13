@@ -42,7 +42,7 @@ const HistoricoPedidos = () => {
   return (
     <Box
       sx={{
-        p: 2,
+        padding:{xs:0, md:2},
         display: "flex",
         gap: 2,
         flexDirection: { xs: "column", md: "row" } // coluna no mobile, lado a lado no desktop
@@ -50,7 +50,7 @@ const HistoricoPedidos = () => {
     >
 
       {/* Lista de pedidos */}
-      <Paper sx={{ flex: 1, p: 2, width: { xs: "100%", md: "auto" } }}>
+      <Paper sx={{ flex: 1, width: { xs: "100%", md: "auto" } }}>
         <Tabs
           value={tab}
           onChange={(e, newValue) => setTab(newValue)}
@@ -72,7 +72,7 @@ const HistoricoPedidos = () => {
       </Paper>
 
       {/* Painel de detalhes */}
-      <Paper sx={{ width: { xs: "100%", md: 500 }, p: 2 }} elevation={3}>
+      <Paper sx={{ width: { xs: "100%", md: 500 }, padding:{xs:0, md:2} }} elevation={3}>
         <DetalhesPedido
           pedido={pedidoSelecionado}
           pizzas={pizzas}

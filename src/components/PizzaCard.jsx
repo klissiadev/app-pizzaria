@@ -31,6 +31,9 @@ const PizzaCard = ({ pizzas }) => {
     if (!pizzaSelecionada) return;
 
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let precoBase = pizzaSelecionada.preco;
+    if (tamanho === "Média") precoBase *= 1.2;
+    if (tamanho === "Grande") precoBase *= 1.5;
     
     const novoItem = {
       ...pizzaSelecionada,
@@ -38,7 +41,7 @@ const PizzaCard = ({ pizzas }) => {
       quantidade,
       tamanho,
       observacoes: observacoes.trim(),
-      preco: pizzaSelecionada.preco
+      preco: precoBase * quantidade
     };
 
     const itemExistente = carrinho.find(item => item.idUnico === novoItem.idUnico);
@@ -65,16 +68,20 @@ const PizzaCard = ({ pizzas }) => {
         {pizzas && pizzas.length > 0 ? (
           pizzas.map((pizza) => (
             <Card key={pizza.id} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <CardMedia 
-              component="img" 
-              height="140" 
-              image={`/imagens/${pizza.imagem}`} 
-              alt={pizza.nome} 
+              <CardMedia
+                component="img"
+                height="140"
+                image={
+                  pizza.imagem?.startsWith("http")
+                    ? pizza.imagem
+                    : `/imagens/${pizza.imagem || "pizza.png"}`
+                }
+                alt={pizza.nome}
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h6">{pizza.nome}</Typography>
                 <Typography variant="body2" color="text.secondary">{pizza.ingredientes?.join(", ")}</Typography>
-                <Typography sx={{ color: "red", fontWeight: "bold", mt: 1 }}>
+                <Typography variant="h5" sx={{ color: "red", fontWeight: "bold", mt: 1 }}>
                   R$ {pizza.preco.toFixed(2).replace(".", ",")}
                 </Typography>
               </CardContent>
@@ -104,20 +111,26 @@ const PizzaCard = ({ pizzas }) => {
             </Typography>
 
             <FormControl sx={{ mt: 2, mb: 1 }}>
-              <FormLabel>Tamanho</FormLabel>
+              <FormLabel color='error'>Tamanho</FormLabel>
               <RadioGroup
                 row
                 value={tamanho}
                 onChange={(e) => setTamanho(e.target.value)}
               >
                 {tamanhosDisponiveis.map(size => (
-                  <FormControlLabel key={size} value={size} control={<Radio />} label={size} />
+                  <FormControlLabel key={size} value={size} control={<Radio color='error' />} label={size} />
                 ))}
               </RadioGroup>
             </FormControl>
 
             <Typography variant="h6" gutterBottom>
-              Preço: R$ {pizzaSelecionada.preco.toFixed(2).replace(".", ",")}
+              Preço: R$ {(
+                tamanho === "Média"
+                  ? pizzaSelecionada.preco * 1.2
+                  : tamanho === "Grande"
+                  ? pizzaSelecionada.preco * 1.5
+                  : pizzaSelecionada.preco
+              ).toFixed(2).replace(".", ",")}
             </Typography>
 
             <TextField
@@ -138,7 +151,7 @@ const PizzaCard = ({ pizzas }) => {
               sx={{ mb: 2 }}
               fullWidth
             />
-            <Button variant="contained" color="primary" fullWidth onClick={handleAdicionarCarrinho}>
+            <Button variant="contained" color="error" fullWidth onClick={handleAdicionarCarrinho}>
               Adicionar ao Carrinho
             </Button>
           </DialogContent>

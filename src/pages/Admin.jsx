@@ -1,17 +1,25 @@
-import React, { useState} from "react";
-import { Box, Stack, Typography, Button, Grid } from "@mui/material";
+import React, { useState, useEffect} from "react";
+import { Box, Stack, Button, TableCell, Paper , TableContainer, Table, TableHead, TableRow, TableBody, CardActions} from "@mui/material";
 import { Add } from "@mui/icons-material";
-import PizzaCard from "../components/PizzaCrudCard";
 import PizzaDialog from "../components/PizzaDialog";
-import initialPizzas from "../components/PizzaData";
 
 
 const Admin = () => {
   const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-  const [pizzas, setPizzas] = useState(initialPizzas);
+  const [pizzas, setPizzas] = useState([]);
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState(null);
+
+  const API_URL = "http://localhost:3002/pizzas";
+
+  
+  useEffect(() => {
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => setPizzas(data || []))
+      .catch(err => console.error("Erro ao carregar pizzas:", err));
+  }, []);
 
   const handleOpenCreate = () => {
     setEditing(null);
@@ -23,17 +31,41 @@ const Admin = () => {
     setOpen(true);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (!window.confirm("Tem certeza que deseja deletar essa pizza?")) return;
-    setPizzas((prev) => prev.filter((p) => p.id !== id));
+    try {
+      await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      setPizzas(prev => prev.filter(p => p.id !== id));
+    } catch (err) {
+      console.error("Erro ao deletar pizza:", err);
+    }
   };
 
-  const handleSave = (data) => {
-    if (editing) {
-      setPizzas((prev) => prev.map((p) => (p.id === editing.id ? { ...data, id: editing.id } : p)));
-    } else {
-      const nextId = pizzas.length ? Math.max(...pizzas.map((p) => p.id)) + 1 : 1;
-      setPizzas((prev) => [...prev, { ...data, id: nextId }]);
+  const handleSave = async (data) => {
+    try {
+      if (editing) {
+        await fetch(`${API_URL}/${editing.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...data, id: editing.id })
+        });
+      } else {
+        // Gerar próximo id como string
+        const nextId = String(
+          pizzas.length ? Math.max(...pizzas.map(p => Number(p.id))) + 1 : 1
+        );
+
+        await fetch(`${API_URL}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...data, id: nextId })
+        });
+        }
+      // Atualiza lista
+      const res = await fetch(API_URL);
+      setPizzas(await res.json());
+    } catch (err) {
+      console.error("Erro ao salvar pizza:", err);
     }
     setOpen(false);
   };
@@ -48,25 +80,42 @@ const Admin = () => {
       {(usuarioLogado.tipo === "admin") &&(
         <Box p={2} >
           <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" mb={2} >
-            <Typography variant="h5" color="rgba(53, 53, 53, 1)">Inventário Cardápio de Pizzas</Typography>
             <Button variant="contained" startIcon={<Add />} onClick={handleOpenCreate} color="error">
               Nova Pizza
             </Button>
           </Stack>
 
-          <Grid container spacing={2} justifyContent="center" alignItems="center">
-            {pizzas.map((pizza) => (
-              <Grid
-                key={pizza.id} item
-                xs={12} sm={6} md={4}
-                display="flex"
-                justifyContent="center"
-              >
-                <PizzaCard pizza={pizza} onEdit={handleOpenEdit} onDelete={handleDelete}/>
-              </Grid>
-            ))}
-          </Grid>
-
+          <TableContainer component={Paper}>
+            <Table aria-label="Inventário Cardápio de Pizzas">
+              <TableHead>
+                <TableRow>
+                  <TableCell><strong>Id</strong></TableCell>
+                  <TableCell><strong>Nome</strong></TableCell>
+                  <TableCell><strong>Ingredientes</strong></TableCell>
+                  <TableCell><strong>Preço</strong></TableCell>
+                  <TableCell><strong>Categoria</strong></TableCell>
+                  <TableCell><strong></strong></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {pizzas.map((pizza) => (
+                  <TableRow key={pizza.id}>
+                    <TableCell>{pizza.id}</TableCell>
+                    <TableCell>{pizza.nome}</TableCell>
+                    <TableCell>{pizza.ingredientes.join(", ")}</TableCell>
+                    <TableCell>R$ {pizza.preco.toFixed(2)}</TableCell>
+                    <TableCell>{pizza.categoria}</TableCell>
+                    <TableCell>
+                      <CardActions>
+                        <Button variant="contained"  color="success" onClick={() => handleOpenEdit(pizza)}>Editar</Button>
+                        <Button variant="contained"  color="error" onClick={() => handleDelete(pizza.id)}>Deletar</Button>
+                      </CardActions>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
 
           {open && (
             <PizzaDialog

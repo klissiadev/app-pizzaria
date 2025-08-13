@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, MenuItem, Grid, Box, Stack, Chip, Typography } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,6 +15,7 @@ const schema = yup.object({
 });
 
 const PizzaDialog = ({ open, onClose, onSave, editing }) => {
+
   const { control, handleSubmit, watch, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: editing || {
@@ -25,6 +26,17 @@ const PizzaDialog = ({ open, onClose, onSave, editing }) => {
       categoria: "Tradicional",
     },
   });
+
+  useEffect(() => {
+    if (editing) {
+      reset({
+        ...editing,
+        ingredientes: Array.isArray(editing.ingredientes)
+          ? editing.ingredientes.join(", ")
+          : editing.ingredientes
+      });
+    }
+  }, [editing, reset]);
 
   const submit = (data) => {
     onSave({

@@ -26,14 +26,10 @@ const Cardapio = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("/db-pizzas.json")
-      .then((response) => {
-        setPizzas(response.data.pizzas || []);
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar as pizzas:", error);
-      });
+    fetch("http://localhost:3002/pizzas")
+      .then(res => res.json())
+      .then(data => setPizzas(data || []))
+      .catch(err => console.error("Erro ao carregar pizzas:", err));
   }, []);
 
   const pizzasFiltradas =
@@ -58,6 +54,7 @@ const Cardapio = () => {
   
   return (
     <Box sx={{ bgcolor: "#f5f5f5", minHeight: "100vh" }}>
+      {((usuarioLogado === null)) && (
       <AppBar position="static" sx={{ bgcolor: "#558858ff" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h6">Cardápio</Typography>
@@ -69,6 +66,7 @@ const Cardapio = () => {
           </Button>
         </Toolbar>
       </AppBar>
+      )}
 
       <Box sx={{ display: "flex", gap: 2, p: 2, flexWrap: "wrap" }}>
         {botoes.map(({ id, label }) => (
