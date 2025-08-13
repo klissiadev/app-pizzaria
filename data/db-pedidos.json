@@ -124,6 +124,151 @@
       "endereco": null,
       "total": 89.88,
       "status": "Novo"
+    },
+    {
+      "id": "5",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": 5,
+          "nome": "Chocolate com Morango",
+          "observacao": [],
+          "preco": "34.90",
+          "quantidade": 2,
+          "total": 69.8
+        },
+        {
+          "pizzaId": 3,
+          "nome": "Frango com Catupiry",
+          "observacao": [],
+          "preco": "39.90",
+          "quantidade": 9,
+          "total": 359.09999999999997
+        },
+        {
+          "pizzaId": 2,
+          "nome": "Calabresa",
+          "observacao": "sem cebolo, mussarela e calabresa",
+          "tamanho": "Média",
+          "preco": "36.50",
+          "quantidade": 1,
+          "total": 36.5
+        },
+        {
+          "pizzaId": 1,
+          "nome": "Margherita",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "32.90",
+          "quantidade": 2,
+          "total": 65.8
+        }
+      ],
+      "tipoEntrega": "entrega",
+      "numeroMesa": null,
+      "endereco": "sjdkfdskbfbsdbf",
+      "total": 531.1999999999999,
+      "status": "Novo"
+    },
+    {
+      "id": "6",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "8",
+          "nome": "Vegana de Legumes",
+          "observacao": "sem cebola",
+          "tamanho": "Média",
+          "preco": "48.00",
+          "quantidade": 1,
+          "total": 48
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "5",
+      "endereco": null,
+      "total": 48,
+      "status": "Novo"
+    },
+    {
+      "id": "7",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "8",
+          "nome": "Vegana de Legumes",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "48.00",
+          "quantidade": 1,
+          "total": 48
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "cliente@pizzaria.com",
+      "endereco": null,
+      "total": 48,
+      "status": "Novo"
+    },
+    {
+      "id": "8",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "1",
+          "nome": "Margherita",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "39.48",
+          "quantidade": 1,
+          "total": 39.48
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "jdfksdfbsc",
+      "endereco": null,
+      "total": 39.48,
+      "status": "Novo"
+    },
+    {
+      "id": "9",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "2",
+          "nome": "Calabresa",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "43.80",
+          "quantidade": 1,
+          "total": 43.8
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "ajhdkabibad",
+      "endereco": null,
+      "total": 43.8,
+      "status": "Novo"
+    },
+    {
+      "id": "10",
+      "usuarioId": 2,
+      "itens": [
+        {
+          "pizzaId": "1",
+          "nome": "Margherita",
+          "observacao": [],
+          "tamanho": "Média",
+          "preco": "39.48",
+          "quantidade": 1,
+          "total": 39.48
+        }
+      ],
+      "tipoEntrega": "mesa",
+      "numeroMesa": "ajjk",
+      "endereco": null,
+      "total": 39.48,
+      "status": "Novo"
     }
   ]
 }

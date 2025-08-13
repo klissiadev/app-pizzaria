@@ -5,6 +5,7 @@ import { Brightness4, Brightness7 } from '@mui/icons-material';
 import Header from './components/Header';
 import AppRoutes from './routes/AppRoutes';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -50,6 +51,7 @@ function App() {
       </div>
       <Header />
       <AppRoutes />
+      <ToastContainer />
     </ThemeProvider>
   );
 }

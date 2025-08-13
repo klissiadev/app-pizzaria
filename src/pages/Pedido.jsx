@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ItemPedido from "../components/ItemPedido"; 
+import { toast } from 'react-toastify'
 
 const Pedido = () => {
   const navigate = useNavigate();
@@ -56,17 +57,17 @@ const Pedido = () => {
 
   const handleFinalizarPedido = async () => {
     if (!carrinho.length) {
-      alert("Seu carrinho está vazio!");
+      toast.error("Seu carrinho está vazio!", {autoClose: 3000});
       return;
     }
 
     if (tipoEntrega === "mesa" && !numeroMesa) {
-      alert("Informe o número da mesa");
+      toast("Por favor, informe o número da mesa", {autoClose: 3000});
       return;
     }
 
     if (tipoEntrega === "entrega" && !endereco) {
-      alert("Informe o endereço para entrega");
+      toast("Por favor, informe o endereço para entrega", {autoClose: 3000});
       return;
     }
 
@@ -100,11 +101,11 @@ const Pedido = () => {
       });
 
       localStorage.removeItem("carrinho");
-      alert("Pedido realizado com sucesso!");
+      toast.success("Pedido realizado com sucesso!", {autoClose: 3000});
       navigate("/pages/cardapio");
     } catch (err) {
       console.error("Erro ao salvar pedido:", err);
-      alert("Erro ao finalizar pedido");
+      toast.error("Erro ao finalizar pedido", {autoClose: 3000});
     }
   };
 
