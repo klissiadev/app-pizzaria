@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, M
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { toast } from "react-toastify";
 
 const categorias = ["Tradicional", "Especial", "Vegana", "Doce"];
 
@@ -16,7 +17,7 @@ const schema = yup.object({
 
 const PizzaDialog = ({ open, onClose, onSave, editing }) => {
 
-  const { control, handleSubmit, watch, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: editing || {
       nome: "",
@@ -39,11 +40,19 @@ const PizzaDialog = ({ open, onClose, onSave, editing }) => {
   }, [editing, reset]);
 
   const submit = (data) => {
-    onSave({
+  try {
+    const formattedData = {
       ...data,
       ingredientes: data.ingredientes.split(",").map((i) => i.trim()),
-    });
-  };
+    };
+
+    onSave(formattedData);
+    toast.success("Dados salvos com sucesso!");
+  } catch (error) {
+    console.error("Erro ao salvar os dados:", error);
+    toast.error("Erro ao salvar os dados. Tente novamente.");
+  }
+};
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>

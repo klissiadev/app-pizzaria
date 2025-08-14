@@ -123,20 +123,6 @@
       "categoria": "Tradicional"
     },
     {
-      "id": "10",
-      "nome": "Palmito",
-      "ingredientes": [
-        "Molho de tomate",
-        "Mussarela",
-        "Palmito",
-        "Cebola",
-        "Azeitona"
-      ],
-      "preco": 39,
-      "imagem": "palmito.jpg",
-      "categoria": "Especialidades"
-    },
-    {
       "id": "11",
       "nome": "Cheddar & Bacon",
       "ingredientes": [
@@ -202,7 +188,6 @@
       "categoria": "Vegana"
     },
     {
-      "id": "16",
       "categoria": "Especial",
       "imagem": "https://data.thefeedfeed.com/recommended/post_2151637.jpeg",
       "preco": 66,
@@ -212,7 +197,19 @@
         "Gouchujang",
         "Ovo"
       ],
-      "nome": "Saja Boys"
+      "nome": "Saja Boys",
+      "id": "16"
+    },
+    {
+      "id": "17",
+      "categoria": "Doce",
+      "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRZrUEzFJFC_tJZhfHlNlvLYHoAAeJqyqHgg&s",
+      "preco": 53.9,
+      "ingredientes": [
+        "Queijo",
+        "Creme de Leite e Goiabada"
+      ],
+      "nome": "Romeu e Julieta"
     }
   ]
 }
