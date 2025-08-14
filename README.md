@@ -69,3 +69,7 @@ app-pizzaria/
 
 ## Observações
 - Para a instalação, é preciso abrir 3 terminais diferentes, todos no caminho cd app-pizzaria.
+
+## Fluxograma
+
+![Fluxograma do sistema](https://raw.githubusercontent.com/klissiadev/app-pizzaria/main/WhatsApp%20Image%202025-08-13%20at%2010.53.35%20PM.jpeg)
